@@ -67,3 +67,48 @@ body[data-theme=dark] .escaped-slot { background: #df718a0c; color: #e79aaf; }
 @media(max-width:1100px){.topbar-right{gap:15px}.topbar-label{display:none}}
 @media(max-width:600px){.make-link{padding:11px 12px;font-size:9px}.topbar-right{gap:7px}.topbar .theme-toggle{padding:9px 11px}.topbar .theme-text{display:none}.story h1{margin-bottom:22px}.secondary-cta{margin:-3px 0 30px}.stage-sticker{right:9px;top:16px;font-size:7px;padding:7px 9px}.taunt-toast{font-size:10px;bottom:12px}.result-actions{gap:8px}.result-actions button{flex:1 1 43%;font-size:9px}.result-actions .result-ghost{flex:1 1 100%}.result-card{padding:20px 5px 22px}.result-card h2{margin-bottom:16px}.result-card .result-icon{font-size:64px}.builder-content{padding:22px}.builder-dialog{border-radius:22px}.builder-share-row{flex-wrap:wrap}}
 @media(prefers-reduced-motion:reduce){.heart-portal.launch,.cinema-beams,.cinema-spark,.no-decoy{animation:none!important;display:none}.taunt-toast{transition:none}.make-link,.secondary-cta{transition:none}}
+
+
+/* Flowers x Love Lab — flower-garden/ keeps the original Flowers styling isolated. */
+.flower-invitation{width:min(100%,500px);display:flex;align-items:center;gap:15px;text-align:left;margin:13px auto 21px;padding:16px 18px;background:linear-gradient(120deg,rgba(241,130,164,.20),rgba(241,181,208,.08));border:1px solid #f6b5d287;color:#ffe5ed;border-radius:19px;cursor:pointer;box-shadow:inset 0 1px #fff2,0 8px 36px #e85e9340;transition:transform .25s,background .3s}
+.flower-invitation:hover{transform:translateY(-3px);background:linear-gradient(120deg,rgba(241,130,164,.38),rgba(241,181,208,.12))}
+.flower-invitation:focus-visible,.flower-close:focus-visible,.flower-bottom-actions button:focus-visible{outline:3px solid #ffb3d5;outline-offset:3px}
+.flower-invitation-icon{font-size:32px;color:#ffc0d4;text-shadow:0 0 24px #f67ba0;animation:flower-invite-wiggle 3.5s ease-in-out infinite}
+.flower-invitation-copy{display:flex;flex:1;flex-direction:column;gap:3px;min-width:0}
+.flower-invitation-copy strong{font-size:clamp(12px,2.5vw,16px);font-weight:800;letter-spacing:-.02em}
+.flower-invitation-copy small{font-size:9px;letter-spacing:.13em;font-weight:900;color:#fdbbd4}
+.flower-invitation-arrow{font-size:22px;color:#ffd0e2}
+@keyframes flower-invite-wiggle{0%,100%{transform:rotate(-11deg) scale(.93)}50%{transform:rotate(11deg) scale(1.13)}}
+.flower-experience{position:fixed;inset:0;z-index:90;overflow:hidden;background:#010d15;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .75s ease,visibility .75s;isolation:isolate;color:white}
+.flower-experience.show{opacity:1;visibility:visible;pointer-events:auto}
+.flower-iframe{position:absolute;inset:0;border:0;width:100%;height:100%;background:#010d15;display:block;pointer-events:none;z-index:0}
+.flower-haze{position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom,rgba(0,11,19,.87),rgba(0,12,21,.3) 30%,transparent 46%,transparent 65%,rgba(0,9,18,.42));pointer-events:none}
+.flower-floating-badge{position:absolute;z-index:2;left:clamp(15px,4vw,44px);top:clamp(16px,3vh,38px);color:#a8f9ef;font-weight:900;font-size:10px;letter-spacing:.2em;text-shadow:0 0 20px #44e5dfaa}
+.flower-close{position:absolute;z-index:3;top:clamp(16px,3vh,32px);right:clamp(16px,4vw,40px);width:42px;height:42px;background:#f7ffff13;color:#f3ffff;border:1px solid #c7faff71;border-radius:50%;font-size:16px;cursor:pointer;backdrop-filter:blur(8px);transition:background .2s,transform .2s}
+.flower-close:hover{transform:rotate(90deg);background:#e8ffff32}
+.flower-message{position:absolute;z-index:2;top:clamp(78px,9vh,120px);left:50%;transform:translateX(-50%);width:min(720px,94vw);text-align:center;pointer-events:none;text-shadow:0 4px 22px #001e2d;animation:flower-message-enter 1.1s ease-out both}
+.flower-message .flower-eyebrow{margin:0 0 12px;color:#95f1e8;letter-spacing:.28em;font-weight:900;font-size:10px}
+.flower-message h2{font-family:Georgia,'Times New Roman',serif;font-size:clamp(37px,5.5vw,72px);font-weight:500;line-height:1.06;letter-spacing:-.06em;margin:0 auto 12px;color:#f5fffb}
+.flower-message h2 em{font-style:italic;color:#ff9fc3}
+.flower-message h2 i{font-weight:400;color:#9ef0e5}
+.flower-message p:not(.flower-eyebrow){font-size:clamp(12px,1.6vw,17px);line-height:1.6;max-width:520px;margin:auto;color:#e6f6f4}
+.flower-message blockquote{pointer-events:auto;font:italic clamp(12px,1.8vw,16px) Georgia,serif;color:#ffbbd4;margin:12px auto 0;max-width:510px;overflow-wrap:anywhere}
+.flower-message blockquote[hidden]{display:none}
+.flower-bottom-actions{position:absolute;bottom:max(24px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);display:flex;gap:10px;align-items:center;justify-content:center;z-index:2;width:min(94vw,550px)}
+.flower-bottom-actions button{min-height:47px;padding:13px 18px;font:900 10px Manrope,Arial,sans-serif;letter-spacing:.09em;border-radius:60px;cursor:pointer;white-space:nowrap;transition:transform .2s,background .2s}
+.flower-bottom-actions button:hover{transform:translateY(-3px)}
+.flower-replay{border:1px solid #7ae5de8c;color:#b8fff1;background:#06383b91}
+.flower-back{border:1px solid #ffffffb9;color:#092a35;background:linear-gradient(130deg,#effff9,#a8efdf)}
+@keyframes flower-message-enter{0%{transform:translate(-50%,-18px);opacity:0}100%{transform:translate(-50%,0);opacity:1}}
+@media(max-width:600px){
+  .flower-message{top:71px}
+  .flower-message h2{font-size:clamp(34px,11vw,52px)}
+  .flower-message .flower-eyebrow{font-size:8px;letter-spacing:.19em}
+  .flower-message p:not(.flower-eyebrow){max-width:310px}
+  .flower-floating-badge{font-size:8px;left:14px;top:23px;letter-spacing:.12em}
+  .flower-close{width:36px;height:36px}
+  .flower-bottom-actions{flex-wrap:wrap;bottom:max(17px,env(safe-area-inset-bottom))}
+  .flower-bottom-actions button{font-size:9px;min-height:45px;padding:12px 14px}
+  .flower-invitation{margin-bottom:14px}
+}
+@media(prefers-reduced-motion:reduce){.flower-invitation-icon,.flower-message{animation:none}.flower-experience{transition:none}}
