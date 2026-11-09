@@ -33,3 +33,12 @@ The app includes `prefers-reduced-motion` handling, dialog focus management, key
 - `index.html` — interface, link builder, and Yes reveal
 - `style.css` — responsive layout, liquid glass, flight animations, light/dark themes
 - `script.js` — personalisation, runaway No, split animation, sharing, PNG export
+## Flowers surprise (integrated from another project) 🌸
+
+Pressing **Yes** starts Love Lab's cinematic celebration and then reveals a **secret garden** with three animated flowers. The recipient's name, sender, and optional message carry through to the flower surprise. Guests can reopen it, replay the bloom, or return to their result to save/share the result card.
+
+The original bloom animation is copied from the owner's [`flowers`](https://github.com/limuwani/flowers) repository (`bunga-flower/index.html`, `main.css`, `main.js`) to `flower-garden/`. The garden loads inside an iframe so its global styles don't break Love Lab's interactive liquid buttons.
+
+**Visibility note:** The `flowers` repository is private, but copying these files into this public site makes the included flower animation source public once this PR is merged. The original private repository is unchanged.
+
+The flower garden is only loaded after Yes, has replay and back controls, works with touchscreens and keyboard, and has reduced-motion styling.
