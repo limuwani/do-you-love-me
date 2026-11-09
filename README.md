@@ -12,13 +12,13 @@ When the project is viewed from a local `file://` URL, the prank can still be pr
 
 ## Interaction
 
-- **Yes, I do:** CSS liquid spin → expanding pink heart → dramatic light beams, sparkles, floating hearts, personalised reveal, and share options.
+- **Yes, I do:** CSS liquid spin → expanding pink heart → soft cinematic glow, sparkles, continuously rising hearts, personalised reveal, and share options.
 - **Maybe a little:** A reassuring little message and blue liquid-glass activation.
 - **No, not really (desktop):** Moves away from the cursor across the screen. Repeated attempts increase speed, urgency, jokes, and decoys.
 - **No, not really (touchscreen):** Splits into two halves, flies apart with different paths, and reassembles somewhere else. Repeated taps trigger the prank again.
 - **Share the result:** Save an original 1080 × 1350 PNG card generated in the browser (names, note, and escape count). Share the result message using the device share sheet, or copy it if native sharing is unavailable.
 - **Replay:** Restores the original button layout, resets the escape count and effects, and preserves the personalised recipient details.
-- **Light / dark:** Theme toggle.
+- **Dark mode only:** Midnight glass interface and matching dark prank-link builder; no theme switch.
 
 ## Privacy and accessibility
 
@@ -31,7 +31,7 @@ The app includes `prefers-reduced-motion` handling, dialog focus management, key
 ## Files
 
 - `index.html` — interface, link builder, and Yes reveal
-- `style.css` — responsive layout, liquid glass, flight animations, light/dark themes
+- `style.css` — responsive layout, liquid glass, flight animations, dark-only styling
 - `script.js` — personalisation, runaway No, split animation, sharing, PNG export
 ## Flowers surprise (integrated from another project) 🌸
 
@@ -42,3 +42,7 @@ The original bloom animation is copied from the owner's [`flowers`](https://gith
 **Visibility note:** The `flowers` repository is private, but copying these files into this public site makes the included flower animation source public once this PR is merged. The original private repository is unchanged.
 
 The flower garden is only loaded after Yes, has replay and back controls, works with touchscreens and keyboard, and has reduced-motion styling.
+
+### Dark Hearts update
+
+The spinning pink celebration wheel was removed. The Yes celebration now uses a soft cinematic glow with continuously rising hearts; dark mode is the only theme. All personalised links, runaway No interactions, result cards and the Flowers garden are retained.

@@ -1,7 +1,6 @@
 (() => {
   'use strict';
   const body = document.body;
-  const themeBtn = document.getElementById('themeToggle');
   const stage = document.getElementById('capsuleStage');
   const pills = [...document.querySelectorAll('.liquid-pill')];
   const yesBtn = document.getElementById('yesBtn');
@@ -154,7 +153,7 @@
       makeSparks();
       resultTimer = 0;
       // Let the first celebration play, then reveal the surprise garden.
-      flowerTimer = window.setTimeout(bloomGarden, motionReduced.matches ? 500 : 3800);
+      flowerTimer = window.setTimeout(bloomGarden, motionReduced.matches ? 700 : 4900);
     }, motionReduced.matches ? 0 : 570);
   }
 
@@ -177,15 +176,15 @@
     heartField.replaceChildren();
     if (motionReduced.matches) return;
     const colours = ['#f69cb7', '#f5c7d5', '#ed749b', '#fff2f6', '#ce527e'];
-    for (let i = 0; i < 42; i++) {
+    for (let i = 0; i < 54; i++) {
       const heart = document.createElement('span');
       heart.className = 'floating-heart';
       heart.textContent = Math.random() > .26 ? '♥' : '♡';
       heart.style.setProperty('--left', `${Math.random() * 100}%`);
-      heart.style.setProperty('--size', `${12 + Math.random() * 32}px`);
-      heart.style.setProperty('--duration', `${3.2 + Math.random() * 4}s`);
-      heart.style.setProperty('--delay', `${Math.random() * 1.8}s`);
-      heart.style.setProperty('--drift', `${Math.random() * 240 - 120}px`);
+      heart.style.setProperty('--size', `${12 + Math.random() * 29}px`);
+      heart.style.setProperty('--duration', `${5.5 + Math.random() * 4.2}s`);
+      heart.style.setProperty('--delay', `${-Math.random() * 9}s`);
+      heart.style.setProperty('--drift', `${Math.random() * 220 - 110}px`);
       heart.style.setProperty('--color', colours[Math.floor(Math.random() * colours.length)]);
       heartField.appendChild(heart);
     }
@@ -698,13 +697,4 @@
     }
   });
 
-  themeBtn.addEventListener('click', () => {
-    const dark = body.dataset.theme !== 'dark';
-    body.dataset.theme = dark ? 'dark' : 'light';
-    themeBtn.setAttribute('aria-pressed', String(dark));
-    themeBtn.setAttribute('aria-label', `Switch to ${dark ? 'light' : 'dark'} mode`);
-    themeBtn.querySelector('.theme-icon').textContent = dark ? '☀' : '☾';
-    themeBtn.querySelector('.theme-text').textContent = dark ? 'LIGHT' : 'DARK';
-    document.querySelector('meta[name="theme-color"]').content = dark ? '#16151b' : '#f5f2ed';
-  });
 })();
