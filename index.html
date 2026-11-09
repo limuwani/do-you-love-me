@@ -3,11 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Send a ridiculous little love question. The No button runs. Yes makes magic. Create your own personalised prank link.">
+  <meta property="og:title" content="Love Lab — a little question for you 💗">
+  <meta property="og:description" content="Someone has a question for you. Try to catch the No button!">
   <meta name="theme-color" content="#f5f2ed">
-  <meta name="description" content="One little question, three liquid-glass answers, and a heart with a mind of its own.">
   <title>Do You Love Me? — A little love experiment</title>
   <link rel="stylesheet" href="style.css">
-  
+  <script src="script.js" defer></script>
 </head>
 <body data-theme="light">
   <div class="noise" aria-hidden="true"></div>
@@ -17,21 +19,24 @@
     <header class="topbar">
       <a class="brand" href="#home" aria-label="Love Lab home"><span class="brand-mark" aria-hidden="true">♥</span><span>love<span class="brand-dot">.</span>lab</span></a>
       <div class="topbar-right">
-        <span class="topbar-label">A LITTLE LOVE EXPERIMENT <span class="tiny-star">✳</span> 001</span>
+        <span class="topbar-label">A LITTLE LOVE EXPERIMENT <span class="tiny-star">✳</span> 002</span>
+        <button class="make-link" id="makeLinkTop" type="button"><span aria-hidden="true">✦</span> MAKE A PRANK</button>
         <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span aria-hidden="true" class="theme-icon">☾</span><span class="theme-text">DARK</span></button>
       </div>
     </header>
     <main id="home" class="hero">
       <section class="story" aria-labelledby="mainTitle">
-        <p class="eyebrow"><span class="eyebrow-line"></span> THE QUESTION I'VE BEEN WAITING TO ASK</p>
+        <p class="eyebrow"><span class="eyebrow-line"></span><span id="personalGreeting">THE QUESTION I'VE BEEN WAITING TO ASK</span></p>
         <h1 id="mainTitle">Do you<br><span class="love-word">love <span class="heart-inline" aria-hidden="true">♥</span></span><br>me<span class="question-mark">?</span></h1>
-        <p class="intro">Okay, so... this is a little awkward.<br>But my heart has one very important question for you.</p>
+        <p class="intro" id="introText">Okay, so... this is a little awkward.<br>But my heart has one very important question for you.</p>
+        <button class="secondary-cta" id="makeLinkHero" type="button">MAKE YOUR OWN PRANK LINK <span aria-hidden="true">↗</span></button>
         <div class="story-foot"><span class="foot-heart" aria-hidden="true">♡</span><span>CHOOSE YOUR ANSWER <b>→</b><small>WARNING: THE “NO” BUTTON HAS TRUST ISSUES.</small></span></div>
       </section>
       <section class="interaction" aria-label="Choose your answer">
-        <div class="interaction-head"><span><span class="status-dot"></span> THE LOVE TEST</span><span>VOL. 01 / 03</span></div>
+        <div class="interaction-head"><span><span class="status-dot"></span> THE LOVE TEST</span><span id="escapeCounter">0 ESCAPES · GOOD LUCK</span></div>
         <div class="capsule-stage" id="capsuleStage">
           <div class="stage-halo" aria-hidden="true"></div>
+          <div class="stage-sticker" id="stageSticker" aria-hidden="true">TRY TO SAY NO 👀</div>
           <div class="pill-rack" id="pillRack" role="group" aria-label="Answer options">
             <button class="liquid-pill pill-yes" id="yesBtn" type="button" data-color="rose" aria-label="Yes, I do">
               <span class="fluid-layer" aria-hidden="true"><span class="fluid-bloom"></span><span class="fluid-spiral"></span><span class="fluid-reflection"></span><span class="fluid-sweep"></span></span>
@@ -55,15 +60,48 @@
   </div>
   <div class="celebration" id="resultContainer" aria-hidden="true">
     <div class="celebration-aura" aria-hidden="true"></div>
+    <div class="cinema-beams" aria-hidden="true"></div>
+    <div class="cinema-stars" id="sparkField" aria-hidden="true"></div>
     <div id="heartField" aria-hidden="true"></div>
     <div class="result-card" role="dialog" aria-modal="true" aria-labelledby="resultTitle" tabindex="-1">
       <div class="result-icon" aria-hidden="true">♥</div>
-      <p class="result-eyebrow">I KNEW IT ALL ALONG</p>
+      <p class="result-eyebrow" id="resultEyebrow">THE CUTEST ANSWER EVER</p>
       <h2 id="resultTitle">You just made<br>my <em>heart</em> spin.</h2>
-      <p>Looks like this little love experiment has a very happy ending. ♡</p>
-      <button class="replay" id="replayBtn" type="button">ONE MORE TIME <span aria-hidden="true">↗</span></button>
+      <p id="resultDescription">This little love experiment has a very happy ending. ♡</p>
+      <div class="love-note" id="resultNote" hidden></div>
+      <div class="result-actions">
+        <button class="replay" id="downloadCardBtn" type="button">SAVE THE MOMENT <span aria-hidden="true">↓</span></button>
+        <button class="result-secondary" id="shareResultBtn" type="button">SHARE RESULT <span aria-hidden="true">↗</span></button>
+        <button class="result-ghost" id="replayBtn" type="button">PLAY AGAIN <span aria-hidden="true">↺</span></button>
+      </div>
+      <p class="action-message" id="resultActionStatus" role="status" aria-live="polite"></p>
     </div>
   </div>
-<script src="script.js" defer></script>
+  <div id="tauntToast" class="taunt-toast" role="status" aria-live="polite" aria-atomic="true"></div>
+  <div id="heartPortal" class="heart-portal" aria-hidden="true">♥</div>
+  <dialog id="linkBuilder" class="builder-dialog" aria-labelledby="builderTitle">
+    <div class="builder-content">
+      <div class="builder-top"><span class="builder-kicker">✦ PERSONALISE YOUR PRANK</span><button id="closeBuilder" class="icon-close" type="button" aria-label="Close">✕</button></div>
+      <div class="builder-icon" aria-hidden="true">♥</div>
+      <h2 id="builderTitle">Make it <em>personal.</em></h2>
+      <p class="builder-description">Give your favourite person an impossible question. The link does the rest.</p>
+      <form id="builderForm">
+        <label for="toInput">WHO'S GETTING PRANKED?</label>
+        <input id="toInput" name="to" maxlength="32" autocomplete="off" placeholder="e.g. Sarah" required>
+        <label for="fromInput">WHO'S SENDING THE LOVE?</label>
+        <input id="fromInput" name="from" maxlength="32" autocomplete="off" placeholder="e.g. Your secret admirer" required>
+        <label for="noteInput">LITTLE SECRET NOTE <span>(OPTIONAL)</span></label>
+        <textarea id="noteInput" name="note" rows="2" maxlength="140" placeholder="e.g. You owe me ice cream after this 😌"></textarea>
+        <button type="submit" class="builder-submit">CREATE MY PRANK LINK <span aria-hidden="true">↗</span></button>
+      </form>
+      <div id="linkOutput" class="link-output" hidden>
+        <label for="generatedLink">YOUR PERSONALISED LINK</label>
+        <div class="link-copy-row"><input id="generatedLink" type="text" readonly aria-label="Generated prank link"><button id="copyLinkBtn" type="button">COPY</button></div>
+        <div class="builder-share-row"><button id="nativeShareBtn" class="builder-share" type="button">SHARE WITH SOMEONE ↗</button><button id="previewLinkBtn" class="builder-preview" type="button">PREVIEW IT ♡</button></div>
+        <p id="linkFeedback" role="status" aria-live="polite"></p>
+      </div>
+      <p class="builder-privacy">No account or server needed. Names and the note are embedded in the link — anyone with the link can read them.</p>
+    </div>
+  </dialog>
 </body>
 </html>
