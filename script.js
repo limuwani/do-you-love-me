@@ -23,6 +23,13 @@
   const resultEyebrow = document.getElementById('resultEyebrow');
   const resultNote = document.getElementById('resultNote');
   const resultActionStatus = document.getElementById('resultActionStatus');
+  const flowerExperience = document.getElementById('flowerExperience');
+  const flowerFrame = document.getElementById('flowerFrame');
+  const openFlowersBtn = document.getElementById('openFlowersBtn');
+  const flowerCloseBtn = document.getElementById('closeFlowersBtn');
+  const flowerBackBtn = document.getElementById('flowerBackBtn');
+  const flowerReplayBtn = document.getElementById('flowerReplayBtn');
+  let flowerTimer = 0;
   const linkBuilder = document.getElementById('linkBuilder');
   const builderForm = document.getElementById('builderForm');
   const linkOutput = document.getElementById('linkOutput');
@@ -71,6 +78,57 @@
     });
   });
 
+  // Original animated Flowers page is isolated in an iframe to prevent its
+  // full-viewport CSS from interfering with Love Lab and the running No button.
+  function bloomGarden() {
+    if (!result.classList.contains('show') || flowerExperience.classList.contains('show')) return;
+    window.clearTimeout(flowerTimer);
+    flowerTimer = 0;
+    document.getElementById('flowerRecipient').textContent = personalized.to || 'you';
+    document.getElementById('flowerSender').textContent = personalized.from
+      ? `These flowers are a little surprise from ${personalized.from}. You made their day. ♡`
+      : 'Because saying yes deserves a whole garden. ♡';
+    const note = document.getElementById('flowerNote');
+    note.hidden = !personalized.note;
+    note.textContent = personalized.note ? `“${personalized.note}”` : '';
+    flowerFrame.src = `./flower-garden/index.html?bloom=${Date.now()}`;
+    result.inert = true;
+    result.setAttribute('aria-hidden', 'true');
+    flowerExperience.inert = false;
+    flowerExperience.classList.add('show');
+    flowerExperience.setAttribute('aria-hidden', 'false');
+    flowerCloseBtn.focus({ preventScroll: true });
+  }
+  function hideGarden(returnToResult = true) {
+    window.clearTimeout(flowerTimer);
+    flowerTimer = 0;
+    if (!flowerExperience.classList.contains('show')) return;
+    flowerExperience.classList.remove('show');
+    flowerExperience.setAttribute('aria-hidden', 'true');
+    flowerExperience.inert = true;
+    flowerFrame.removeAttribute('src');
+    result.inert = false;
+    if (result.classList.contains('show')) {
+      result.setAttribute('aria-hidden', 'false');
+      if (returnToResult) openFlowersBtn.focus({ preventScroll: true });
+    }
+  }
+  openFlowersBtn.addEventListener('click', bloomGarden);
+  flowerCloseBtn.addEventListener('click', () => hideGarden());
+  flowerBackBtn.addEventListener('click', () => hideGarden());
+  flowerReplayBtn.addEventListener('click', () => {
+    if (!flowerExperience.classList.contains('show')) return;
+    flowerFrame.src = `./flower-garden/index.html?bloom=${Date.now()}`;
+  });
+  flowerExperience.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') { event.preventDefault(); hideGarden(); return; }
+    if (event.key !== 'Tab') return;
+    const buttons = [flowerCloseBtn, flowerReplayBtn, flowerBackBtn];
+    const current = buttons.indexOf(document.activeElement);
+    if (event.shiftKey && current <= 0) { event.preventDefault(); buttons.at(-1).focus(); }
+    else if (!event.shiftKey && current === buttons.length - 1) { event.preventDefault(); buttons[0].focus(); }
+  });
+
   function revealLove() {
     if (result.classList.contains('show') || resultTimer) return;
     activate(yesBtn, 'I KNEW WE WERE ON THE SAME WAVELENGTH ♥', '03 / 03');
@@ -95,6 +153,8 @@
       makeHearts();
       makeSparks();
       resultTimer = 0;
+      // Let the first celebration play, then reveal the surprise garden.
+      flowerTimer = window.setTimeout(bloomGarden, motionReduced.matches ? 500 : 3800);
     }, motionReduced.matches ? 0 : 570);
   }
 
@@ -375,6 +435,7 @@
   });
 
   function reset() {
+    hideGarden(false);
     clearTimeout(resultTimer);
     resultTimer = 0;
     heartPortal.classList.remove('launch');
@@ -515,6 +576,7 @@
   });
 
   function resetWithoutFocus() {
+    hideGarden(false);
     clearTimeout(resultTimer);
     resultTimer = 0;
     heartPortal.classList.remove('launch');

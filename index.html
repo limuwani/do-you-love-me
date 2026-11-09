@@ -8,8 +8,8 @@
   <meta property="og:description" content="Someone has a question for you. Try to catch the No button!">
   <meta name="theme-color" content="#f5f2ed">
   <title>Do You Love Me? — A little love experiment</title>
-  <link rel="stylesheet" href="style.css?v=20261109-prankfix2">
-  <script src="script.js?v=20261109-prankfix2" defer></script>
+  <link rel="stylesheet" href="style.css?v=20261109-flower-garden">
+  <script src="script.js?v=20261109-flower-garden" defer></script>
 </head>
 <body data-theme="light">
   <div class="noise" aria-hidden="true"></div>
@@ -69,6 +69,11 @@
       <h2 id="resultTitle">You just made<br>my <em>heart</em> spin.</h2>
       <p id="resultDescription">This little love experiment has a very happy ending. ♡</p>
       <div class="love-note" id="resultNote" hidden></div>
+      <button class="flower-invitation" id="openFlowersBtn" type="button">
+        <span class="flower-invitation-icon" aria-hidden="true">✿</span>
+        <span class="flower-invitation-copy"><strong>A secret surprise is blooming...</strong><small>OPEN YOUR FLOWER GARDEN</small></span>
+        <span class="flower-invitation-arrow" aria-hidden="true">↗</span>
+      </button>
       <div class="result-actions">
         <button class="replay" id="downloadCardBtn" type="button">SAVE THE MOMENT <span aria-hidden="true">↓</span></button>
         <button class="result-secondary" id="shareResultBtn" type="button">SHARE RESULT <span aria-hidden="true">↗</span></button>
@@ -77,6 +82,22 @@
       <p class="action-message" id="resultActionStatus" role="status" aria-live="polite"></p>
     </div>
   </div>
+  <section class="flower-experience" id="flowerExperience" aria-hidden="true" role="dialog" aria-modal="true" aria-label="A surprise flower garden" inert>
+    <iframe class="flower-iframe" id="flowerFrame" title="Animated flowers from our original Flowers project" tabindex="-1" aria-hidden="true"></iframe>
+    <div class="flower-haze" aria-hidden="true"></div>
+    <div class="flower-floating-badge" aria-hidden="true">✧ THE SECRET GARDEN ✧</div>
+    <button class="flower-close" id="closeFlowersBtn" type="button" aria-label="Close the flowers and return to the result">✕</button>
+    <div class="flower-message">
+      <p class="flower-eyebrow">YOU CAUGHT MY HEART, SO...</p>
+      <h2>For <em id="flowerRecipient">you</em>, with <i>love.</i></h2>
+      <p id="flowerSender">A little garden, just for you. ♡</p>
+      <blockquote id="flowerNote" hidden></blockquote>
+    </div>
+    <div class="flower-bottom-actions">
+      <button type="button" id="flowerReplayBtn" class="flower-replay">↻ BLOOM AGAIN</button>
+      <button type="button" id="flowerBackBtn" class="flower-back">← BACK TO OUR MOMENT</button>
+    </div>
+  </section>
   <div id="tauntToast" class="taunt-toast" role="status" aria-live="polite" aria-atomic="true"></div>
   <div id="heartPortal" class="heart-portal" aria-hidden="true">♥</div>
   <dialog id="linkBuilder" class="builder-dialog" aria-labelledby="builderTitle">
